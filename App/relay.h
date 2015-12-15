@@ -1,7 +1,7 @@
 #ifndef __RELAY_H
 #define __RELAY_H
 
-#include "main.h"
+#include "context.h"
 
 void RELAY_Init(void);
 void RELAY_ON(void);
