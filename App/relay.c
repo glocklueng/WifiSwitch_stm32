@@ -29,7 +29,7 @@ void RELAY_OFF(void) {
 }
 
 void RELAT_SETTIME(uint32_t t, uint8_t task) {
-	relay_delay = t;
+	relay_delay = t + 200;
 	current_task = task;
 	recievetask = 1;
 }
