@@ -55,9 +55,14 @@ void usart_Init(void) {
  */
 void USART1_IRQHandler(void) {
 	static uint8_t p = 0;
-	if(USART_GetITStatus(USART1, USART_IT_RXNE) != RESET) {
-		UsartBuffer[p++] = USART_ReceiveData(USART1);
-		if (UsartBuffer[p - 1] == '\n') p = 0;
+	if (USART_GetITStatus(USART1, USART_IT_RXNE) != RESET) {
+		uint8_t tmp = USART_ReceiveData(USART1);
+		UsartBuffer[p++] = tmp;
+		if ((p > 1 && UsartBuffer[p - 2] == '\x0d' && UsartBuffer[p - 1] == '\x0a') || 
+			(UsartBuffer[p - 1] == '\n')) {
+			wifi_pushData();
+			p = 0;
+		}
 		if (p >= BUFFERLENGTH) p = 0;
 	}
 }

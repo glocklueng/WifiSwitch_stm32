@@ -7,7 +7,10 @@
  */
 void ALL_Init(void) {
 	LED_Init();
+	delay_Init();
 	RELAY_Init();
+	usart_Init();
+	wifi_Init();
 }
 
 /**
